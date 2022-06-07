@@ -8,6 +8,7 @@
 
   @stack('prepend-style')
   @include('includes.style')
+  @livewireStyles
   @stack('addon-style')
 
 </head>
@@ -26,6 +27,7 @@
 
   @stack('prepend-script')
   @include('includes.script')
+  @livewireScripts
   @stack('addon-script')
   
 </body>
