@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tujuan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TujuanController extends Controller
@@ -22,7 +23,13 @@ class TujuanController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['lat'] = Str::before($request->latlong, ', ');
+        $data['long'] = Str::after($request->latlong, ', ');
+        // return response()->json($data);
+        Tujuan::create($data);
+
+        return redirect()->back()->with('success', 'Tujuan Berhasil Ditambahakan!');
     }
 
     public function show($id)
@@ -42,6 +49,9 @@ class TujuanController extends Controller
 
     public function destroy($id)
     {
-        //
+        $item = Tujuan::find($id);
+        $item->delete();
+
+        return redirect()->back()->with('success', 'Tujuan Berhasil Dihapus!');
     }
 }

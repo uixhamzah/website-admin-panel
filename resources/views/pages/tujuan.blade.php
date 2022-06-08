@@ -35,8 +35,8 @@
             @foreach ($items as $item)
               <tr>
                 <td>{{ $item->nama_rs }}</td>
-                <td>{{ Str::headline($item->kabupaten->provinsi->name) }}</td>
-                <td>{{ Str::headline($item->kabupaten->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->provinsi->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->name) }}</td>
                 <td>
                   <a href="https://www.google.com/maps/?t=k&q={{ $item->lat }},{{ $item->long }}" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
                     <i class="far fa-thumbtack text-danger"></i>

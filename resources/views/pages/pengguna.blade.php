@@ -31,8 +31,8 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->nama }}</td>
-                <td>{{ Str::headline($item->kabupaten->provinsi->name) }}</td>
-                <td>{{ Str::headline($item->kabupaten->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->provinsi->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->name) }}</td>
                 <td>{{ $item->no_telp }}</td>
                 <td>
                   <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail">

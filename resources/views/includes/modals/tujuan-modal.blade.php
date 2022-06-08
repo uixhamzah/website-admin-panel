@@ -14,32 +14,14 @@
           
           <div class="form-group">
             <label for="nama_rs">Nama Rumah Sakit</label>
-            <input type="text" id="nama_rs" class="form-control" name="nama_rs" required>
+            <input type="text" id="nama_rs" class="form-control" name="nama_rs" autocomplete="off" required>
           </div>
 
-          <div class="form-group">
-            <label for="provinsi">Provinsi</label>
-            <select class="form-select" id="provinsi" name="provinsi" required>
-              <option value="" selected disabled>-- Pilih Provinsi --</option>
-              <option>Nama Provinsi</option>
-              <option>Nama Provinsi</option>
-              <option>Nama Provinsi</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="kabupaten">Kabupaten</label>
-            <select class="form-select" id="kabupaten" name="kabupaten" required>
-              <option value="" selected disabled>-- Pilih Kabupaten --</option>
-              <option>Nama Kabupaten</option>
-              <option>Nama Kabupaten</option>
-              <option>Nama Kabupaten</option>
-            </select>
-          </div>
+          @livewire('alamat')
           
           <div class="form-group">
             <label for="latlong">LatLong</label>
-            <input type="text" id="latlong" class="form-control" name="latlong" required>
+            <input type="text" id="latlong" class="form-control" name="latlong" autocomplete="off" required>
           </div>
           
         </div>
@@ -47,7 +29,7 @@
           <button type="button" class="btn" data-bs-dismiss="modal">
             Tutup
           </button>
-          <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+          <button type="submit" class="btn btn-primary ml-1">
             Simpan
           </button>
         </div>

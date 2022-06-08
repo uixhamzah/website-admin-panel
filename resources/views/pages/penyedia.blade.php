@@ -36,8 +36,8 @@
             @foreach ($items as $item)
               <tr>
                 <td>{{ $item->nama_penyedia }}</td>
-                <td>{{ Str::headline($item->kabupaten->provinsi->name) }}</td>
-                <td>{{ Str::headline($item->kabupaten->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->provinsi->name) }}</td>
+                <td>{{ Str::title($item->kabupaten->name) }}</td>
                 <td>{{ $item->driver->count() }}</td>
                 <td>
                   @if ($item->kategori == 'Rumah Sakit')
