@@ -27,6 +27,7 @@
 
   @stack('prepend-script')
   @include('includes.script')
+  @include('includes.modals.password-modal')
   @include('sweetalert::alert')
   @livewireScripts
   @stack('addon-script')

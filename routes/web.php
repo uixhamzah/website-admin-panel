@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'home'])->name('dashboard');
+Route::put('ganti-password', [MainController::class, 'gantiPassword'])->name('ganti-password');
 Route::get('riwayat-pesanan', [MainController::class, 'riwayat'])->name('riwayat-pesanan');
 Route::resource('admin', AdminController::class);
 Route::resource('rumah-sakit-tujuan', TujuanController::class);

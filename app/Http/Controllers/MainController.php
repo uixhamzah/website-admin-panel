@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Driver;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Order;
+use App\Models\Driver;
 use App\Models\Pengguna;
 use App\Models\Penyedia;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class MainController extends Controller
 {
@@ -65,6 +69,26 @@ class MainController extends Controller
             'pesanan' => $pesanan,
             'mingguan' => $mingguan,
             'hari' => $hari,
+        ]);
+    }
+
+    public function gantiPassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        if (Hash::check($request->current_password, auth()->user()->password)) {
+            $user = User::find(auth()->user()->id);
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return redirect()->back()->with('success', 'Kata sandi anda berhasil diubah');
+        }
+
+        throw ValidationException::withMessages([
+            'current_password' => 'Kata sandi anda salah'
         ]);
     }
 
