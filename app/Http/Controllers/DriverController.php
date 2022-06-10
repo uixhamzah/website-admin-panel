@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\Penyedia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -10,9 +12,11 @@ class DriverController extends Controller
     public function index()
     {
         $items = Driver::all()->sortDesc();
+        $penyedia = Penyedia::all();
 
         return view('pages.driver', [
-            'items' => $items
+            'items' => $items,
+            'penyedia' => $penyedia
         ]);
     }
 
@@ -23,7 +27,16 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $data['nama'] = Str::title($request->nama);
+        $plat_a = Str::upper($request->plat_a);
+        $plat_c = Str::upper($request->plat_c);
+        $data['plat'] = $plat_a.' '.$request->plat_b.' '.$plat_c;
+        
+        Driver::create($data);
+
+        return redirect()->back()->with('success', $data['nama'].' berhasil ditambahakan!');
     }
 
     public function show($id)

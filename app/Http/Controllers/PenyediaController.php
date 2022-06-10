@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penyedia;
 use App\Models\Provinsi;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PenyediaController extends Controller
@@ -24,7 +25,13 @@ class PenyediaController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['lat'] = Str::before($request->latlong, ', ');
+        $data['long'] = Str::after($request->latlong, ', ');
+        
+        Penyedia::create($data);
+
+        return redirect()->back()->with('success', $request->nama_penyedia.' berhasil ditambahakan!');
     }
 
     public function show($id)
