@@ -35,7 +35,7 @@
                 <td>{{ Str::title($item->kabupaten->name) }}</td>
                 <td>{{ $item->no_telp }}</td>
                 <td>
-                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail">
+                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                     <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Pengguna"></i>
                   </button>
                 </td>

@@ -41,7 +41,7 @@
                 <td>{{ $item->driver->nama }}</td>
                 <td>
                   <a href="https://www.google.com/maps/?t=k&q=1.4876308588283509, 124.83760674457933" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
-                    <i class="far fa-hospital text-danger"></i>
+                    <i class="far fa-hospital {{ $item->tujuan->trashed() ? '' : 'text-danger' }}"></i>
                     {{ $item->tujuan->nama_rs }}
                   </a>
                 </td>
@@ -56,7 +56,7 @@
                   @endif
                 </td>
                 <td>
-                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail">
+                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                     <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"></i>
                   </button>
                 </td>

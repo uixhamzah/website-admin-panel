@@ -42,7 +42,7 @@ class OrderSeeder extends Seeder
             'id_driver' => 5,
             'id_tujuan' => 3,
             'tanggal' => Carbon::today()->subDays(5),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 1,
@@ -119,7 +119,7 @@ class OrderSeeder extends Seeder
             'id_driver' => 3,
             'id_tujuan' => 1,
             'tanggal' => Carbon::today()->subDays(4),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Dibatalkan',
         ]);
         Order::create([
             'id_pengguna' => 1,
@@ -154,14 +154,14 @@ class OrderSeeder extends Seeder
             'id_driver' => 3,
             'id_tujuan' => 1,
             'tanggal' => Carbon::today()->subDays(3),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 2,
             'id_driver' => 5,
             'id_tujuan' => 3,
             'tanggal' => Carbon::today()->subDays(3),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 1,
@@ -196,14 +196,14 @@ class OrderSeeder extends Seeder
             'id_driver' => 3,
             'id_tujuan' => 1,
             'tanggal' => Carbon::today()->subDays(2),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Dibatalkan',
         ]);
         Order::create([
             'id_pengguna' => 2,
             'id_driver' => 5,
             'id_tujuan' => 3,
             'tanggal' => Carbon::today()->subDays(2),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 1,
@@ -301,14 +301,14 @@ class OrderSeeder extends Seeder
             'id_driver' => 3,
             'id_tujuan' => 1,
             'tanggal' => Carbon::today()->subDay(),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 2,
             'id_driver' => 6,
             'id_tujuan' => 3,
             'tanggal' => Carbon::today()->subDay(),
-            'status' => 'Sedang Berjalan',
+            'status' => 'Selesai',
         ]);
         Order::create([
             'id_pengguna' => 1,

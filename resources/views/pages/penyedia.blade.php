@@ -54,13 +54,13 @@
                 </td>
                 <td>
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                       <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Penyedia"></i>
                     </button>
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">
                       <i class="far fa-pen text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Penyedia"></i>
                     </button>
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#hapus">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#hapus-{{ $item->id }}">
                       <i class="far fa-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Penyedia"></i>
                     </button>
                   </div>

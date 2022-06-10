@@ -27,7 +27,6 @@
               <th class="text-center">Nama</th>
               <th class="text-center">Username</th>
               <th class="text-center">Email</th>
-              <th class="text-center">No. Telp</th>
               <th></th>
             </tr>
           </thead>
@@ -43,7 +42,7 @@
                   </a>
                 </td>
                 <td>
-                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#setelan">
+                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#setelan-{{ $item->id }}">
                     <i class="far fa-gear" data-bs-toggle="tooltip" data-bs-placement="top" title="Setel Admin"></i>
                   </button>
                 </td>

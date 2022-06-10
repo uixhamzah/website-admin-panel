@@ -33,6 +33,6 @@ class Order extends Model
 
     public function tujuan()
     {
-        return $this->belongsTo(Tujuan::class, 'id_tujuan', 'id');
+        return $this->belongsTo(Tujuan::class, 'id_tujuan', 'id')->withTrashed();
     }
 }

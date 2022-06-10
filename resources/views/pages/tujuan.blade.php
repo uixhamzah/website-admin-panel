@@ -45,10 +45,10 @@
                 </td>
                 <td>
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                       <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Tujuan"></i>
                     </button>
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">
                       <i class="far fa-pen text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Tujuan"></i>
                     </button>
                     <a href="#" class="btn icon btn-sm btn-light" onclick="hapusData({{ $item->id }}, '{{ $item->nama_rs }}')">

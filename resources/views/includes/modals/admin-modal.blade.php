@@ -1,3 +1,4 @@
+{{-- Tambah --}}
 <div class="modal fade text-left" id="tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -27,7 +28,9 @@
   </div>
 </div>
 
-<div class="modal fade text-left" id="setelan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+{{-- Setel --}}
+@foreach ($items as $item)
+<div class="modal fade text-left" id="setelan-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
@@ -55,3 +58,4 @@
     </div>
   </div>
 </div>
+@endforeach
