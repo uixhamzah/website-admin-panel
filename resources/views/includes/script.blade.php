@@ -7,4 +7,3 @@
 
 <script src="{{ url('frontend/assets/js/main.js') }}"></script>
 <script src="{{ url('frontend/scripts/main.js') }}"></script>
-<script src="{{ url('frontend/scripts/delete-confirmation.js') }}"></script>
