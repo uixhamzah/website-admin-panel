@@ -28,7 +28,7 @@ class Order extends Model
 
     public function driver()
     {
-        return $this->belongsTo(Driver::class, 'id_driver', 'id');
+        return $this->belongsTo(Driver::class, 'id_driver', 'id')->withTrashed();
     }
 
     public function tujuan()

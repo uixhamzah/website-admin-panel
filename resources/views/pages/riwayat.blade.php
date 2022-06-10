@@ -38,7 +38,13 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->pengguna->nama }}</td>
-                <td>{{ $item->driver->nama }}</td>
+                <td>
+                  @if ($item->driver->trashed())
+                    <span class="badge bg-light-secondary text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Dihapus">{{ $item->driver->nama }}</span>
+                  @else
+                    {{ $item->driver->nama }}
+                  @endif
+                </td>
                 <td>
                   <a href="https://www.google.com/maps/?t=k&q=1.4876308588283509, 124.83760674457933" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
                     <i class="far fa-hospital {{ $item->tujuan->trashed() ? '' : 'text-danger' }}"></i>

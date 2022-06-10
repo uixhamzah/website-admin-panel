@@ -43,6 +43,10 @@ class DriverController extends Controller
 
     public function destroy($id)
     {
-        //
+        $item = Driver::find($id);
+        $title = $item->nama;
+        $item->delete();
+
+        return redirect()->back()->with('success', $title.' dihapus!');
     }
 }

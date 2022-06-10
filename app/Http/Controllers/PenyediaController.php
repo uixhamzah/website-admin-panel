@@ -44,6 +44,13 @@ class PenyediaController extends Controller
 
     public function destroy($id)
     {
-        //
+        $item = Penyedia::find($id);
+        foreach ($item->driver as $driver) {
+            $driver->delete();
+        }
+        $title = $item->nama_penyedia;
+        $item->delete();
+
+        return redirect()->back()->with('success', $title.' dihapus!');
     }
 }

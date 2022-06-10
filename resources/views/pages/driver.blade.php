@@ -53,9 +53,13 @@
                     <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">
                       <i class="far fa-pen text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Driver"></i>
                     </button>
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#hapus-{{ $item->id }}">
+                    <a href="#" class="btn icon btn-sm btn-light" onclick="hapusData({{ $item->id }}, '{{ $item->nama }}')">
                       <i class="far fa-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Driver"></i>
-                    </button>
+                    </a>
+                    <form action="{{ route('driver.destroy', $item->id) }}" id="hapus-{{ $item->id }}" method="POST">
+                      @method('delete')
+                      @csrf
+                    </form>
                   </div>
                 </td>
               </tr>

@@ -29,7 +29,7 @@ class TujuanController extends Controller
         // return response()->json($data);
         Tujuan::create($data);
 
-        return redirect()->back()->with('success', $request->nama_rs.' Berhasil Ditambahakan!');
+        return redirect()->back()->with('success', $request->nama_rs.' berhasil ditambahakan!');
     }
 
     public function show($id)
@@ -53,6 +53,6 @@ class TujuanController extends Controller
         $title = $item->nama_rs;
         $item->delete();
 
-        return redirect()->back()->with('success', $title.' Dihapus!');
+        return redirect()->back()->with('success', $title.' dihapus!');
     }
 }
