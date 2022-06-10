@@ -50,8 +50,9 @@ class TujuanController extends Controller
     public function destroy($id)
     {
         $item = Tujuan::find($id);
+        $title = $item->nama_rs;
         $item->delete();
 
-        return redirect()->back()->with('success', 'Data Dihapus!');
+        return redirect()->back()->with('success', $title.' Berhasil Dihapus!');
     }
 }

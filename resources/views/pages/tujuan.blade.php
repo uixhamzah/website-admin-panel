@@ -51,9 +51,13 @@
                     <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit">
                       <i class="far fa-pen text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Tujuan"></i>
                     </button>
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#hapus">
+                    <a href="#" class="btn icon btn-sm btn-light" onclick="hapusData({{ $item->id }}, '{{ $item->nama_rs }}')">
                       <i class="far fa-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Tujuan"></i>
-                    </button>
+                    </a>
+                    <form action="{{ route('rumah-sakit-tujuan.destroy', $item->id) }}" id="hapus-{{ $item->id }}" method="POST">
+                      @method('delete')
+                      @csrf
+                    </form>
                   </div>
                 </td>
               </tr>
