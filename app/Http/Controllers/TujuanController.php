@@ -29,7 +29,7 @@ class TujuanController extends Controller
         // return response()->json($data);
         Tujuan::create($data);
 
-        return redirect()->back()->with('success', 'Tujuan Berhasil Ditambahakan!');
+        return redirect()->back()->with('success', 'Data Berhasil Ditambahakan!');
     }
 
     public function show($id)
@@ -52,6 +52,6 @@ class TujuanController extends Controller
         $item = Tujuan::find($id);
         $item->delete();
 
-        return redirect()->back()->with('success', 'Tujuan Berhasil Dihapus!');
+        return redirect()->back()->with('success', 'Data Dihapus!');
     }
 }
