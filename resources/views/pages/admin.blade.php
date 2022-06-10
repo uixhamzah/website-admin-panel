@@ -63,6 +63,12 @@
 @endpush
 
 @push('addon-script')
+@if (count($errors))
+  <script>
+    var daftarAdminModal = new bootstrap.Modal(document.getElementById('tambah'));
+    daftarAdminModal.show();
+  </script>
+@endif
 <script>
   let table1 = document.querySelector('#table1');
   let dataTable = new simpleDatatables.DataTable(table1, {
