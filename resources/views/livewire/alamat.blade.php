@@ -15,9 +15,15 @@
       <label for="kabupaten">Kabupaten</label>
       <select class="form-select" id="kabupaten" name="id_kabupaten" required>
         <option value="" selected disabled>-- Pilih Kabupaten --</option>
-        @foreach ($kabupaten as $item)
-          <option value="{{ $item->id }}">{{ Str::title($item->name) }}</option>
-        @endforeach
+        @if ($kab)
+          @foreach ($kabupaten as $item)
+            <option value="{{ $item->id }}" {{ $item->id == $kab->id ? 'selected' : '' }}>{{ Str::title($item->name) }}</option>
+          @endforeach
+        @else
+          @foreach ($kabupaten as $item)
+            <option value="{{ $item->id }}">{{ Str::title($item->name) }}</option>
+          @endforeach
+        @endif
       </select>
     </div>
   @endif

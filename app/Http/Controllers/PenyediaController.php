@@ -46,7 +46,14 @@ class PenyediaController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['lat'] = Str::before($request->latlong, ', ');
+        $data['long'] = Str::after($request->latlong, ', ');
+
+        $item = Penyedia::find($id);
+        $item->update($data);
+
+        return redirect()->back()->with('success', $request->nama_penyedia.' berhasil diubah!');
     }
 
     public function destroy($id)

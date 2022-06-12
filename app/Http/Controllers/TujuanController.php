@@ -44,7 +44,14 @@ class TujuanController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['lat'] = Str::before($request->latlong, ', ');
+        $data['long'] = Str::after($request->latlong, ', ');
+
+        $item = Tujuan::find($id);
+        $item->update($data);
+
+        return redirect()->back()->with('success', $request->nama_rs.' berhasil diubah!');
     }
 
     public function destroy($id)

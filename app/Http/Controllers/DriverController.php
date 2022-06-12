@@ -51,7 +51,17 @@ class DriverController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        $data['nama'] = Str::title($request->nama);
+        $plat_a = Str::upper($request->plat_a);
+        $plat_c = Str::upper($request->plat_c);
+        $data['plat'] = $plat_a.' '.$request->plat_b.' '.$plat_c;
+
+        $item = Driver::find($id);
+        $item->update($data);
+
+        return redirect()->back()->with('success', $request->nama.' berhasil diubah!');
     }
 
     public function destroy($id)

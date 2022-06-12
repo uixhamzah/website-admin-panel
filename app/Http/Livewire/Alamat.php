@@ -12,11 +12,16 @@ class Alamat extends Component
     public $kabupaten;
 
     public $selectedProvinsi = "";
+    public $kab;
 
     public function mount()
     {
         $this->provinsi = Provinsi::all();
         $this->kabupaten = collect();
+        if ($this->kab) {
+            $this->selectedProvinsi = $this->kab->province_id;
+            $this->updatedSelectedProvinsi();
+        }
     }
 
     public function render()
