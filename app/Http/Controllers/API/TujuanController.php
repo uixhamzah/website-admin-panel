@@ -82,7 +82,7 @@ class TujuanController extends Controller
                 return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
             }
         } catch (\Throwable $th) {
-            return ApiFormatter::createApi(400, 'Data tidak ditemukan');
+            return ApiFormatter::createApi(400, 'Gagal mengupdate data');
         }
     }
 
