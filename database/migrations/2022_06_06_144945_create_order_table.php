@@ -18,8 +18,10 @@ return new class extends Migration
             $table->foreignId('id_pengguna');
             $table->foreignId('id_driver');
             $table->foreignId('id_tujuan');
+            $table->string('keadaan');
+            $table->text('foto')->nullable();
             $table->date('tanggal');
-            $table->string('status');
+            $table->string('status')->default('Sedang Berjalan');
             $table->timestamps();
             $table->softDeletes();
         });

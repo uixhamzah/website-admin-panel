@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Tujuan;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -27,12 +30,36 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        $driver = User::with(['driverDetails.penyedia.kabupaten.provinsi'])->where('role','Driver')->get()->random();
+        $tujuan = Tujuan::with('kabupaten.provinsi')->get()->random();
+        $tanggal = Carbon::today();
+
+        $data = [
+            'id_pengguna' => $user->id,
+            'id_driver' => $driver->id,
+            'id_tujuan' => $tujuan->id,
+            'keadaan' => $request->keadaan,
+            'tanggal' => $tanggal,
+            'pengguna' => $user,
+            'driver' => $driver,
+            'tujuan' => $tujuan,
+        ];
+
+        $order = Order::create([
+            'id_pengguna' => $user->id,
+            'id_driver' => $driver->id,
+            'id_tujuan' => $tujuan->id,
+            'keadaan' => $request->keadaan,
+            'tanggal' => $tanggal,
+        ]);
+
+        return ApiFormatter::createApi(201, 'Pesanan berhasil dibuat', $data);
     }
 
     public function show($id)
     {
-        $item = Order::with(['pengguna','driver.penyedia','tujuan.kabupaten.provinsi'])->find($id);
+        $item = Order::with(['pengguna','driver.user','driver.penyedia.kabupaten.provinsi','tujuan.kabupaten.provinsi'])->find($id);
 
         if ($item) {
             return ApiFormatter::createApi(200, 'Detail pesanan berhasil diambil', $item);
