@@ -26,3 +26,5 @@ Route::resource('rumah-sakit-tujuan', TujuanController::class);
 Route::resource('penyedia', PenyediaController::class);
 Route::resource('driver', DriverController::class);
 Route::get('pengguna', [MainController::class, 'pengguna'])->name('pengguna');
+
+require __DIR__.'/auth.php';
