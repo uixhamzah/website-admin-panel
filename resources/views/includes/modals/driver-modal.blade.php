@@ -14,8 +14,13 @@
         <div class="modal-body">
           
           <div class="form-group">
-            <label for="nama">Nama Driver</label>
-            <input type="text" id="nama" class="form-control" name="nama" autocomplete="off" required>
+            <label for="name">Nama Driver</label>
+            <input type="text" id="name" class="form-control" name="name" autocomplete="off" required>
+          </div>
+            
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" name="email" autocomplete="off" required>
           </div>
 
           <div class="form-group">
@@ -111,16 +116,21 @@
           <div class="modal-body">
             
             <div class="form-group">
-              <label for="nama">Nama Driver</label>
-              <input type="text" id="nama" class="form-control" name="nama" autocomplete="off" value="{{ $item->nama }}" required>
+              <label for="name">Nama Driver</label>
+              <input type="text" id="name" class="form-control" name="name" autocomplete="off" value="{{ $item->name }}" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" name="email" autocomplete="off" value="{{ $item->email }}" required>
             </div>
   
             <div class="form-group">
               <label for="jenis_kelamin">Jenis Kelamin</label>
               <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
                 <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
-                <option {{ $item->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option {{ $item->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                <option {{ $item->driverDetails->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                <option {{ $item->driverDetails->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
               </select>
             </div>
   
@@ -129,7 +139,7 @@
               <select class="form-select" id="id_penyedia" name="id_penyedia" required>
                 <option value="" selected disabled>-- Pilih Penyedia --</option>
                 @foreach ($penyedia as $pen)
-                  <option value="{{ $pen->id }}" {{ $pen->id == $item->id_penyedia ? 'selected' : '' }}>{{ $pen->nama_penyedia }}</option>
+                  <option value="{{ $pen->id }}" {{ $pen->id == $item->driverDetails->id_penyedia ? 'selected' : '' }}>{{ $pen->nama_penyedia }}</option>
                 @endforeach
               </select>
             </div>
@@ -138,9 +148,9 @@
             <div class="form-group">
               <label for="plat">Plat</label>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="DB" name="plat_a" maxlength="2" autocomplete="off" value="{{ Str::before($item->plat, ' ') }}" required>
-                <input type="number" class="form-control" placeholder="1234" name="plat_b" max="9999" autocomplete="off" value="{{ (int)Str::after($item->plat, ' ') }}" required>
-                <input type="text" class="form-control" placeholder="WA" name="plat_c" maxlength="3" autocomplete="off" value="{{ Str::after(Str::after($item->plat, ' '), ' ') }}" required>
+                <input type="text" class="form-control" placeholder="DB" name="plat_a" maxlength="2" autocomplete="off" value="{{ Str::before($item->driverDetails->plat, ' ') }}" required>
+                <input type="number" class="form-control" placeholder="1234" name="plat_b" max="9999" autocomplete="off" value="{{ (int)Str::after($item->driverDetails->plat, ' ') }}" required>
+                <input type="text" class="form-control" placeholder="WA" name="plat_c" maxlength="3" autocomplete="off" value="{{ Str::after(Str::after($item->driverDetails->plat, ' '), ' ') }}" required>
               </div>
             </div>
             

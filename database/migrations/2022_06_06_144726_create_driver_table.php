@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('driver', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_penyedia');
-            $table->string('nama');
-            $table->string('jenis_kelamin');
-            $table->string('plat');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('driver', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('id_penyedia');
+        //     $table->string('nama');
+        //     $table->string('jenis_kelamin');
+        //     $table->string('plat');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
     }
 
     /**

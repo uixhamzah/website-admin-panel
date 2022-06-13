@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Driver;
+use App\Models\DriverDetails;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DriverSeeder extends Seeder
 {
@@ -15,39 +17,82 @@ class DriverSeeder extends Seeder
      */
     public function run()
     {
-        Driver::create([
+        User::create([
+            'name' => 'Aditya Manansang',
+            'username' => 'adityamanansang',
+            'email' => 'adityamanansang@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        User::create([
+            'name' => 'Septio Angow',
+            'username' => 'septioangow',
+            'email' => 'septioangow@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        User::create([
+            'name' => 'Agung Berhimpon',
+            'username' => 'agungberhimpon',
+            'email' => 'agungberhimpon@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        User::create([
+            'name' => 'Priska Pilat',
+            'username' => 'priskapilat',
+            'email' => 'priskapilat@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        User::create([
+            'name' => 'Eka Enanto Putra',
+            'username' => 'ekaenantoputra',
+            'email' => 'ekaenantoputra@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        User::create([
+            'name' => 'Ticoalu Sombouwadil',
+            'username' => 'ticoalusombouwadil',
+            'email' => 'ticoalusombouwadil@gmail.com',
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123')
+        ]);
+        
+        DriverDetails::create([
+            'id_user' => 7,
             'id_penyedia' => 1,
-            'nama' => 'Aditya Manansang',
             'jenis_kelamin' => 'Laki-laki',
             'plat' => 'DB 2880 CM',
         ]);
-        Driver::create([
+        DriverDetails::create([
+            'id_user' => 8,
             'id_penyedia' => 2,
-            'nama' => 'Septio Angow',
             'jenis_kelamin' => 'Laki-laki',
             'plat' => 'DB 5424 HD',
         ]);
-        Driver::create([
+        DriverDetails::create([
+            'id_user' => 9,
             'id_penyedia' => 3,
-            'nama' => 'Agung Berhimpon',
             'jenis_kelamin' => 'Laki-laki',
             'plat' => 'DB 5720 DL',
         ]);
-        Driver::create([
+        DriverDetails::create([
+            'id_user' => 10,
             'id_penyedia' => 3,
-            'nama' => 'Priska Pilat',
             'jenis_kelamin' => 'Perempuan',
             'plat' => 'DB 4783 DL',
         ]);
-        Driver::create([
+        DriverDetails::create([
+            'id_user' => 11,
             'id_penyedia' => 4,
-            'nama' => 'Eka Enanto Putra',
             'jenis_kelamin' => 'Laki-laki',
             'plat' => 'DN 9237 BD',
         ]);
-        Driver::create([
+        DriverDetails::create([
+            'id_user' => 12,
             'id_penyedia' => 2,
-            'nama' => 'Ticoalu Sombouwadil',
             'jenis_kelamin' => 'Laki-laki',
             'plat' => 'DB 6745 FC',
         ]);

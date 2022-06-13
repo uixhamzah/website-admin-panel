@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\DriverDetails;
 use App\Models\Penyedia;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class DriverController extends Controller
 {
     public function index()
     {
-        $items = Driver::all()->sortDesc();
+        $items = User::where('role','Driver')->get()->sortDesc();
         $penyedia = Penyedia::all();
 
         return view('pages.driver', [
@@ -27,16 +31,31 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
 
-        $data['nama'] = Str::title($request->nama);
+        $user = User::create([
+            'name' => Str::title($request->name),
+            'username' => Str::snake($request->name),
+            'email' => $request->email,
+            'role' => 'Driver',
+            'password' => Hash::make('Driver123'),
+        ]);
+
+
         $plat_a = Str::upper($request->plat_a);
         $plat_c = Str::upper($request->plat_c);
-        $data['plat'] = $plat_a.' '.$request->plat_b.' '.$plat_c;
-        
-        Driver::create($data);
 
-        return redirect()->back()->with('success', $data['nama'].' berhasil ditambahakan!');
+        DriverDetails::create([
+            'id_user' => $user->id,
+            'id_penyedia' => $request->id_penyedia,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'plat' => $plat_a.' '.$request->plat_b.' '.$plat_c
+        ]);
+
+        return redirect()->back()->with('success', $user->name.' berhasil ditambahakan!');
     }
 
     public function show($id)
@@ -53,21 +72,26 @@ class DriverController extends Controller
     {
         $data = $request->all();
         
-        $data['nama'] = Str::title($request->nama);
-        $plat_a = Str::upper($request->plat_a);
-        $plat_c = Str::upper($request->plat_c);
-        $data['plat'] = $plat_a.' '.$request->plat_b.' '.$plat_c;
-
-        $item = Driver::find($id);
+        $data['name'] = Str::title($request->name);
+        $item = User::find($id);
         $item->update($data);
 
-        return redirect()->back()->with('success', $request->nama.' berhasil diubah!');
+        $plat_a = Str::upper($request->plat_a);
+        $plat_c = Str::upper($request->plat_c);
+
+        DriverDetails::where('id_user', $id)->update([
+            'id_penyedia' => $request->id_penyedia,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'plat' => $plat_a.' '.$request->plat_b.' '.$plat_c
+        ]);
+
+        return redirect()->back()->with('success', $request->name.' berhasil diubah!');
     }
 
     public function destroy($id)
     {
-        $item = Driver::find($id);
-        $title = $item->nama;
+        $item = User::find($id);
+        $title = $item->name;
         $item->delete();
 
         return redirect()->back()->with('success', $title.' dihapus!');

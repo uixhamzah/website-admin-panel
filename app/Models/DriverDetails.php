@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Penyedia extends Model
+class DriverDetails extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'penyedia';
+    protected $table = 'driver_details';
 
     protected $guarded = [
         'id'
@@ -21,13 +21,13 @@ class Penyedia extends Model
 
     ];
 
-    public function driver()
+    public function user()
     {
-        return $this->hasMany(DriverDetails::class, 'id_penyedia', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id')->withTrashed();
     }
-
-    public function kabupaten()
+    
+    public function penyedia()
     {
-        return $this->belongsTo(Kabupaten::class, 'id_kabupaten', 'id');
+        return $this->belongsTo(Penyedia::class, 'id_penyedia', 'id');
     }
 }

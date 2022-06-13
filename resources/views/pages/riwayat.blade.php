@@ -39,10 +39,10 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->pengguna->name }}</td>
                 <td>
-                  @if ($item->driver->trashed())
-                    <span class="badge bg-light-secondary text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Dihapus">{{ $item->driver->nama }}</span>
+                  @if ($item->driver->user->trashed())
+                    <span class="badge bg-light-secondary text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Dihapus">{{ $item->driver->user->name }}</span>
                   @else
-                    {{ $item->driver->nama }}
+                    {{ $item->driver->user->name }}
                   @endif
                 </td>
                 <td>

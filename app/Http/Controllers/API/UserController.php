@@ -76,6 +76,10 @@ class UserController extends Controller
                 throw new \Exception('Password salah');
             }
 
+            if ($user->role != 'User') {
+                return ApiFormatter::createApi(500, 'Login gagal, akun yang terdaftar bukan merupakan akun Pengguna', $request->all());
+            }
+
             $token = $user->createToken('authToken')->plainTextToken;
             
             return ApiFormatter::createApi(200, 'Login berhasil', [

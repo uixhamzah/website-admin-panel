@@ -35,15 +35,15 @@
             @foreach ($items as $item)
               <tr>
                 <td>{{ $item->id }}</td>
-                <td>{{ $item->nama }}</td>
+                <td>{{ $item->name }}</td>
                 <td>
-                  <a href="https://www.google.com/maps/?t=k&q={{ $item->penyedia->lat }},{{ $item->penyedia->long }}" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
-                    <i class="far fa-hospital {{ $item->penyedia->kategori == 'Rumah Sakit' ? 'text-danger' : 'text-info'}}"></i>
-                    {{ $item->penyedia->nama_penyedia }}
+                  <a href="https://www.google.com/maps/?t=k&q={{ $item->driverDetails->penyedia->lat }},{{ $item->driverDetails->penyedia->long }}" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
+                    <i class="far fa-hospital {{ $item->driverDetails->penyedia->kategori == 'Rumah Sakit' ? 'text-danger' : 'text-info'}}"></i>
+                    {{ $item->driverDetails->penyedia->nama_penyedia }}
                   </a>
                 </td>
                 <td>
-                  <span class="badge bg-secondary">{{ $item->plat }}</span>
+                  <span class="badge bg-secondary">{{ $item->driverDetails->plat }}</span>
                 </td>
                 <td>
                   <div class="btn-group" role="group">

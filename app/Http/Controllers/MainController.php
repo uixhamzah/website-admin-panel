@@ -18,7 +18,7 @@ class MainController extends Controller
     public function home()
     {
         $a = User::where('role','User')->get()->count();
-        $b = Driver::all()->count();
+        $b = User::where('role','Driver')->get()->count();
         $c = Penyedia::where('kategori','NGO')->count();
         $d = Penyedia::where('kategori','Rumah Sakit')->count();
 
