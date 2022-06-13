@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Pengguna;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class PenggunaSeeder extends Seeder
 {
@@ -17,18 +18,27 @@ class PenggunaSeeder extends Seeder
     {
         Pengguna::create([
             'id_kabupaten' => 7171,
-            'nama' => 'Jenifer Damar',
+            'name' => 'Jenifer Damar',
+            'username' => 'jeniferdamar',
+            'email' => 'jeniferdamar@gmail.com',
             'no_telp' => '081234567890',
+            'password' => Hash::make('User123')
         ]);
         Pengguna::create([
             'id_kabupaten' => 7171,
-            'nama' => 'Brenda Damar',
+            'name' => 'Brenda Damar',
+            'username' => 'brendadamar',
+            'email' => 'brendadamar@gmail.com',
             'no_telp' => '082112342901',
+            'password' => Hash::make('User123')
         ]);
         Pengguna::create([
             'id_kabupaten' => 7171,
-            'nama' => 'Jenifer Brenda',
+            'name' => 'Jenifer Brenda',
+            'username' => 'jeniferbrenda',
+            'email' => 'jeniferbrenda@gmail.com',
             'no_telp' => '082112342902',
+            'password' => Hash::make('User123')
         ]);
     }
 }

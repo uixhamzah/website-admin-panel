@@ -18,8 +18,10 @@
         <table class="table table-striped text-center" id="table1">
           <thead>
             <tr>
-              <th class="text-center">ID Pengguna</th>
+              {{-- <th class="text-center">ID Pengguna</th> --}}
               <th class="text-center">Nama</th>
+              <th class="text-center">Username</th>
+              <th class="text-center">Email</th>
               <th class="text-center">Provinsi</th>
               <th class="text-center">Kabupaten/Kota</th>
               <th class="text-center">No. Telp</th>
@@ -29,11 +31,18 @@
           <tbody>
             @foreach ($items as $item)
               <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ Str::title($item->kabupaten->provinsi->name) }}</td>
-                <td>{{ Str::title($item->kabupaten->name) }}</td>
-                <td>{{ $item->no_telp }}</td>
+                {{-- <td>{{ $item->id }}</td> --}}
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->username }}</td>
+                <td>
+                  <a href="mailto:{{ $item->email }}" target="_blank" class="btn btn-sm icon icon-left btn-light rounded-pill">
+                    <i class="far fa-envelope text-danger"></i>
+                    {{ $item->email }}
+                  </a>
+                </td>
+                <td>{{ Str::title($item->details->kabupaten->provinsi->name) }}</td>
+                <td>{{ Str::title($item->details->kabupaten->name) }}</td>
+                <td>{{ $item->details->no_telp }}</td>
                 <td>
                   <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                     <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Pengguna"></i>

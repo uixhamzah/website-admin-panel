@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $items = User::where('role','!=','Super Admin')->get()->sortDesc();
+        $items = User::where('role','Admin')->get()->sortDesc();
 
         return view('pages.admin', [
             'items' => $items

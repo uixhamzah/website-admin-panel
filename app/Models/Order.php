@@ -23,7 +23,7 @@ class Order extends Model
 
     public function pengguna()
     {
-        return $this->belongsTo(Pengguna::class, 'id_pengguna', 'id');
+        return $this->belongsTo(User::class, 'id_pengguna', 'id');
     }
 
     public function driver()

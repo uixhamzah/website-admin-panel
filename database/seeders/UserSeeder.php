@@ -40,5 +40,27 @@ class UserSeeder extends Seeder
             'role' => 'Admin',
             'password' => Hash::make('Admin123')
         ]);
+        
+        User::create([
+            'name' => 'Jenifer Damar',
+            'username' => 'jeniferdamar',
+            'email' => 'jeniferdamar@gmail.com',
+            // 'profile_pic' => '',
+            'password' => Hash::make('User123')
+        ]);
+        User::create([
+            'name' => 'Brenda Damar',
+            'username' => 'brendadamar',
+            'email' => 'brendadamar@gmail.com',
+            // 'profile_pic' => '',
+            'password' => Hash::make('User123')
+        ]);
+        User::create([
+            'name' => 'Jenifer Brenda',
+            'username' => 'jeniferbrenda',
+            'email' => 'jeniferbrenda@gmail.com',
+            // 'profile_pic' => '',
+            'password' => Hash::make('User123')
+        ]);
     }
 }

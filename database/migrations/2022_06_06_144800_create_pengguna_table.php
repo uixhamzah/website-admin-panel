@@ -13,14 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengguna', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_kabupaten');
-            $table->string('nama');
-            $table->string('no_telp');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('pengguna', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('id_kabupaten');
+        //     $table->string('name');
+        //     $table->string('username')->unique();
+        //     $table->string('email')->unique();
+        //     $table->string('no_telp');
+        //     $table->string('role')->default('User');
+        //     $table->string('password');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
     }
 
     /**

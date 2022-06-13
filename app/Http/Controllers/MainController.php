@@ -17,7 +17,7 @@ class MainController extends Controller
 {
     public function home()
     {
-        $a = Pengguna::all()->count();
+        $a = User::where('role','User')->get()->count();
         $b = Driver::all()->count();
         $c = Penyedia::where('kategori','NGO')->count();
         $d = Penyedia::where('kategori','Rumah Sakit')->count();
@@ -103,7 +103,7 @@ class MainController extends Controller
     
     public function pengguna()
     {
-        $items = Pengguna::all()->sortDesc();
+        $items = User::where('role','User')->get()->sortDesc();
 
         return view('pages.pengguna', [
             'items' => $items

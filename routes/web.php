@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','is.admin'])->group(function () {
 
   Route::get('/', [MainController::class, 'home'])->name('dashboard');
   Route::put('ganti-password', [MainController::class, 'gantiPassword'])->name('ganti-password');
