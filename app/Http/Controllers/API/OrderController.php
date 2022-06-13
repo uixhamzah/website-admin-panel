@@ -54,7 +54,9 @@ class OrderController extends Controller
             'tanggal' => $tanggal,
         ]);
 
-        return ApiFormatter::createApi(201, 'Pesanan berhasil dibuat', $data);
+        $order = Order::with(['pengguna','driver.driverDetails.penyedia.kabupaten.provinsi','tujuan.kabupaten.provinsi'])->find($order->id);
+
+        return ApiFormatter::createApi(201, 'Pesanan berhasil dibuat', $order);
     }
 
     public function show($id)
@@ -75,7 +77,15 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $order = Order::find($id);
+
+        if ($order) {
+            $order->update($data);
+            return ApiFormatter::createApi(200, 'Pesanan berhasil diubah', $order);
+        } else {
+            return ApiFormatter::createApi(404, 'Pesanan tidak ditemukan');
+        }
     }
 
     public function destroy($id)

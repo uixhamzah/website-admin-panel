@@ -25,4 +25,9 @@ class Tujuan extends Model
     {
         return $this->belongsTo(Kabupaten::class, 'id_kabupaten', 'id');
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class, 'id_tujuan', 'id');
+    }
 }

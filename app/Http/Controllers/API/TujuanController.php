@@ -28,24 +28,24 @@ class TujuanController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'id_kabupaten' => 'required',
-                'nama_rs' => 'required',
-                'lat' => 'required',
-                'long' => 'required',
-            ]);
+        // try {
+        //     $request->validate([
+        //         'id_kabupaten' => 'required',
+        //         'nama_rs' => 'required',
+        //         'lat' => 'required',
+        //         'long' => 'required',
+        //     ]);
 
-            $data = Tujuan::create($request->all());
+        //     $data = Tujuan::create($request->all());
 
-            if ($data) {
-                return ApiFormatter::createApi(201, 'Data tujuan berhasil dibuat', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Gagal menyimpan data');
-            }
-        } catch (Exception $error) {
-            return ApiFormatter::error($error);
-        }
+        //     if ($data) {
+        //         return ApiFormatter::createApi(201, 'Data tujuan berhasil dibuat', $data);
+        //     } else {
+        //         return ApiFormatter::createApi(400, 'Gagal menyimpan data');
+        //     }
+        // } catch (Exception $error) {
+        //     return ApiFormatter::error($error);
+        // }
     }
 
     public function show($id)
@@ -66,36 +66,36 @@ class TujuanController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
-            $request->validate([
-                'id_kabupaten' => 'required',
-                'nama_rs' => 'required',
-                'lat' => 'required',
-                'long' => 'required',
-            ]);
+        // try {
+        //     $request->validate([
+        //         'id_kabupaten' => 'required',
+        //         'nama_rs' => 'required',
+        //         'lat' => 'required',
+        //         'long' => 'required',
+        //     ]);
 
-            $data = Tujuan::find($id);
+        //     $data = Tujuan::find($id);
 
-            if ($data) {
-                $data->update($request->all());
-                return ApiFormatter::createApi(200, 'Data tujuan berhasil diupdate', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
-            }
-        } catch (Exception $error) {
-            return ApiFormatter::error($error);
-        }
+        //     if ($data) {
+        //         $data->update($request->all());
+        //         return ApiFormatter::createApi(200, 'Data tujuan berhasil diupdate', $data);
+        //     } else {
+        //         return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
+        //     }
+        // } catch (Exception $error) {
+        //     return ApiFormatter::error($error);
+        // }
     }
 
     public function destroy($id)
     {
-        $data = Tujuan::find($id);
+        // $data = Tujuan::find($id);
 
-        if ($data) {
-            $data->delete();
-            return ApiFormatter::createApi(200, 'Data tujuan berhasil dihapus', $data);
-        } else {
-            return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
-        }
+        // if ($data) {
+        //     $data->delete();
+        //     return ApiFormatter::createApi(200, 'Data tujuan berhasil dihapus', $data);
+        // } else {
+        //     return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
+        // }
     }
 }
