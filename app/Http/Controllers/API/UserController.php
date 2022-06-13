@@ -22,10 +22,10 @@ class UserController extends Controller
             $request->validate([
                 'id_kabupaten' => ['required'],
                 'name' => ['required','string','max:255'],
-                'username' => ['required','string','max:255','unique:users', 'alpha_dash'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'username' => ['required','string','min:3','max:255','unique:users','alpha_dash'],
+                'email' => ['required','string','email','min:4','max:255','unique:users'],
                 'no_telp' => ['required','string','max:255'],
-                'password' => ['required', 'confirmed', Password::defaults()],
+                'password' => ['required','confirmed',Password::defaults()],
             ]);
 
             $user = User::create([
@@ -84,6 +84,45 @@ class UserController extends Controller
                 'user' => $user
             ]);
 
+        } catch (Exception $error) {
+            return ApiFormatter::error($error, $request->all());
+        }
+    }
+
+    public function fetch(Request $request)
+    {
+        return ApiFormatter::createApi(200,'Profile user berhasil diambil', $request->user());
+    }
+
+    public function updatePorfile(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'id_kabupaten' => ['required'],
+                'name' => ['required','string','min:4','max:255'],
+                'username' => ['required','string','alpha_dash','min:3','max:255','unique:users,username,'. auth()->user()->id],
+                'email' => ['required','string','email','min:4','max:255','unique:users,email,'. auth()->user()->id],
+                'no_telp' => ['required','string','max:255']
+            ]);
+
+            $user = User::find(auth()->user()->id);
+            $user_details = UserDetails::where('id_user', $user->id)->first();
+
+            $user->update([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+            ]);
+            $user_details->update([
+                'id_kabupaten' => $request->id_kabupaten,
+                'no_telp' => $request->no_telp,
+            ]);
+            $user['id_kabupaten'] = $user_details->id_kabupaten;
+            $user['no_telp'] = $user_details->no_telp;
+
+            return ApiFormatter::createApi(200,'Profile user berhasil diupdate', $user);
+            
         } catch (Exception $error) {
             return ApiFormatter::error($error, $request->all());
         }
