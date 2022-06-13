@@ -37,12 +37,14 @@
           </a>
         </li>
 
-        <li class="sidebar-item {{ Request::is('admin') ? 'active' : '' }}">
-          <a href="{{ route('admin.index') }}" class='sidebar-link'>
-            <i class="fad fa-user-lock"></i>
-            <span>Admin</span>
-          </a>
-        </li>
+        @if (auth()->user()->role === 'Super Admin')
+          <li class="sidebar-item {{ Request::is('admin') ? 'active' : '' }}">
+            <a href="{{ route('admin.index') }}" class='sidebar-link'>
+              <i class="fad fa-user-lock"></i>
+              <span>Admin</span>
+            </a>
+          </li>
+        @endif
 
         <li class="sidebar-item {{ Request::is('rumah-sakit-tujuan') ? 'active' : '' }}">
           <a href="{{ route('rumah-sakit-tujuan.index') }}" class='sidebar-link'>

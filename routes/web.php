@@ -18,13 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'home'])->name('dashboard');
-Route::put('ganti-password', [MainController::class, 'gantiPassword'])->name('ganti-password');
-Route::get('riwayat-pesanan', [MainController::class, 'riwayat'])->name('riwayat-pesanan');
-Route::resource('admin', AdminController::class);
-Route::resource('rumah-sakit-tujuan', TujuanController::class);
-Route::resource('penyedia', PenyediaController::class);
-Route::resource('driver', DriverController::class);
-Route::get('pengguna', [MainController::class, 'pengguna'])->name('pengguna');
+Route::middleware(['auth'])->group(function () {
+
+  Route::get('/', [MainController::class, 'home'])->name('dashboard');
+  Route::put('ganti-password', [MainController::class, 'gantiPassword'])->name('ganti-password');
+  Route::get('riwayat-pesanan', [MainController::class, 'riwayat'])->name('riwayat-pesanan');
+  Route::resource('admin', AdminController::class)->middleware('role:Super Admin');
+  Route::resource('rumah-sakit-tujuan', TujuanController::class);
+  Route::resource('penyedia', PenyediaController::class);
+  Route::resource('driver', DriverController::class);
+  Route::get('pengguna', [MainController::class, 'pengguna'])->name('pengguna');
+
+});
 
 require __DIR__.'/auth.php';

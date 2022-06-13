@@ -27,7 +27,7 @@ function keluar() {
     cancelButtonText: 'Batal'
   }).then((result) => {
     if (result.isConfirmed) {
-      alert('keluar');
+      document.getElementById('keluar').submit();
     }
   })
 }
