@@ -22,7 +22,7 @@ class TujuanSeeder extends Seeder
             'long' => '124.83760674457933',
         ]);
         Tujuan::create([
-            'id_kabupaten' => 7171,
+            'id_kabupaten' => 7106,
             'nama_rs' => 'Sentra Medika Hospital Minahasa Utara',
             'lat' => '1.4868969767230382',
             'long' => '124.9164488815423',

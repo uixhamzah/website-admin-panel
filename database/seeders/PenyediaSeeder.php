@@ -23,7 +23,7 @@ class PenyediaSeeder extends Seeder
             'kategori' => 'Rumah Sakit',
         ]);
         Penyedia::create([
-            'id_kabupaten' => 7171,
+            'id_kabupaten' => 7106,
             'nama_penyedia' => 'Sentra Medika Hospital Minahasa Utara',
             'lat' => '1.4868969767230382',
             'long' => '124.9164488815423',
