@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\TujuanController;
@@ -24,6 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
     Route::post('user', [UserController::class, 'updatePorfile']);
     Route::post('logout', [UserController::class, 'logout']);
+
+    // Route::get('order', [OrderController::class, 'index']);
+    Route::resource('order', OrderController::class);
 });
 
 Route::post('register', [UserController::class, 'register']);
