@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\UserDetails;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -52,6 +53,39 @@ class UserController extends Controller
         } catch (Exception $error) {
             return ApiFormatter::error($error, $request->all());
             // return ApiFormatter::createApi(400, 'Pengguna gagal didaftarkan');
+        }
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => ['required', 'string', 'email'],
+                'password' => ['required', 'string'],
+            ]);
+
+            $credentials = request(['email','password']);
+
+            if (! Auth::attempt($credentials)) {
+                return ApiFormatter::createApi(500, 'Autentikasi gagal', $request->all());
+            }
+
+            $user = User::where('email', $request->email)->first();
+
+            if (! Hash::check($request->password, $user->password, [])) {
+                throw new \Exception('Password salah');
+            }
+
+            $token = $user->createToken('authToken')->plainTextToken;
+            
+            return ApiFormatter::createApi(200, 'Login berhasil', [
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'user' => $user
+            ]);
+
+        } catch (Exception $error) {
+            return ApiFormatter::error($error, $request->all());
         }
     }
 }
