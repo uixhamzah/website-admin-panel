@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Tujuan;
+use Exception;
 use Illuminate\Http\Request;
 
 class TujuanController extends Controller
@@ -42,8 +43,8 @@ class TujuanController extends Controller
             } else {
                 return ApiFormatter::createApi(400, 'Gagal menyimpan data');
             }
-        } catch (\Throwable $error) {
-            return ApiFormatter::createApi(400, 'Gagal');;
+        } catch (Exception $error) {
+            return ApiFormatter::error($error);
         }
     }
 
@@ -54,7 +55,7 @@ class TujuanController extends Controller
         if ($data) {
             return ApiFormatter::createApi(200, 'Data tujuan berhasil diambil', $data);
         } else {
-            return ApiFormatter::createApi(400, 'Data tidak ditemukan');
+            return ApiFormatter::createApi(404, 'Data tidak ditemukan');
         }
     }
 
@@ -81,21 +82,20 @@ class TujuanController extends Controller
             } else {
                 return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
             }
-        } catch (\Throwable $th) {
-            return ApiFormatter::createApi(400, 'Gagal mengupdate data');
+        } catch (Exception $error) {
+            return ApiFormatter::error($error);
         }
     }
 
     public function destroy($id)
     {
-        try {
-            $data = Tujuan::find($id);
+        $data = Tujuan::find($id);
 
+        if ($data) {
             $data->delete();
-
             return ApiFormatter::createApi(200, 'Data tujuan berhasil dihapus', $data);
-        } catch (\Throwable $th) {
-            return ApiFormatter::createApi(400, 'Gagal menghapus data');
+        } else {
+            return ApiFormatter::createApi(400, 'Tidak ditemukan data dengan id tersebut');
         }
     }
 }

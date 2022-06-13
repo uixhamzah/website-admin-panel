@@ -6,8 +6,11 @@ use App\Helpers\ApiFormatter;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Pengguna;
+use App\Models\User;
+use App\Models\UserDetails;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -18,32 +21,37 @@ class UserController extends Controller
             $request->validate([
                 'id_kabupaten' => ['required'],
                 'name' => ['required','string','max:255'],
-                'username' => ['required','string','max:255','unique:pengguna', 'alpha_dash'],
+                'username' => ['required','string','max:255','unique:users', 'alpha_dash'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'no_telp' => ['required','string','max:255'],
                 'password' => ['required', 'confirmed', Password::defaults()],
             ]);
 
-            Pengguna::create([
-                'id_kabupaten' => $request->id_kabupaten,
+            $user = User::create([
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
-                'no_telp' => $request->no_telp,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
             ]);
 
-            $user = Pengguna::where('email', $request->email)->first();
+            $user_details = UserDetails::create([
+                'id_user' => $user->id,
+                'id_kabupaten' => $request->id_kabupaten,
+                'no_telp' => $request->no_telp,
+            ]);
 
-            $tokenResult = $user->create_token('authToken')->plainTextToken;
+            // $tokenResult = $user->createToken('authToken')->plainTextToken;
+            $token = $user->createToken('authToken');
             
-            return ApiFormatter::createApi(200, 'Data tujuan berhasil diupdate', $user);
+            return ApiFormatter::createApi(201, 'Pengguna berhasil didaftarkan', [
+                'access_token' => $token->plainTextToken,
+                'token_type' => 'Bearer',
+                'user' => $user
+            ]);
 
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Gagal', [
-                'error' => $error->getMessage(),
-                'user' => Pengguna::first()
-            ]);
+            return ApiFormatter::error($error, $request->all());
+            // return ApiFormatter::createApi(400, 'Pengguna gagal didaftarkan');
         }
     }
 }

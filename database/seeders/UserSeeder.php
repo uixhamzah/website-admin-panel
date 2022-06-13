@@ -46,21 +46,21 @@ class UserSeeder extends Seeder
             'username' => 'jeniferdamar',
             'email' => 'jeniferdamar@gmail.com',
             // 'profile_pic' => '',
-            'password' => Hash::make('User123')
+            'password' => Hash::make('Pengguna123')
         ]);
         User::create([
             'name' => 'Brenda Damar',
             'username' => 'brendadamar',
             'email' => 'brendadamar@gmail.com',
             // 'profile_pic' => '',
-            'password' => Hash::make('User123')
+            'password' => Hash::make('Pengguna123')
         ]);
         User::create([
             'name' => 'Jenifer Brenda',
             'username' => 'jeniferbrenda',
             'email' => 'jeniferbrenda@gmail.com',
             // 'profile_pic' => '',
-            'password' => Hash::make('User123')
+            'password' => Hash::make('Pengguna123')
         ]);
     }
 }

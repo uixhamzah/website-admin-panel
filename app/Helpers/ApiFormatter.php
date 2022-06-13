@@ -19,4 +19,13 @@ class ApiFormatter
     return response()->json(self::$response, self::$response['status']);
   }
 
+  public static function error($error, $data = null)
+  {
+    self::$response['status'] = $error->status;
+    self::$response['message'] = $error->getMessage();
+    self::$response['data'] = $data;
+
+    return response()->json(self::$response, self::$response['status']);
+  }
+
 }
