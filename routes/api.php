@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AlamatController;
 use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('order', OrderController::class);
 });
 
+Route::get('alamat/{prov?}/{kab?}/{kec?}/{des?}', [AlamatController::class, 'index']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
