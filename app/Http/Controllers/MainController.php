@@ -109,4 +109,9 @@ class MainController extends Controller
             'items' => $items
         ]);
     }
+
+    public function distanceMatrix()
+    {
+        return view('pages.maps');
+    }
 }

@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('distance-matrix', [Maincontroller::class, 'distanceMatrix'])->name('distance-matrix');
+
 Route::middleware(['auth','is.admin'])->group(function () {
 
   Route::get('/', [MainController::class, 'home'])->name('dashboard');
