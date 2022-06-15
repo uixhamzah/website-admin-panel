@@ -93,6 +93,8 @@ class DriverController extends Controller
         $item = User::find($id);
         $title = $item->name;
         $item->delete();
+        $detail = DriverDetails::where('id_user', $id)->first();
+        $detail->delete();
 
         return redirect()->back()->with('success', $title.' dihapus!');
     }

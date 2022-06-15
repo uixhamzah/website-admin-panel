@@ -50,7 +50,7 @@ class TujuanController extends Controller
 
     public function show($id)
     {
-        $data = Tujuan::find($id);
+        $data = Tujuan::with('kabupaten.provinsi')->find($id);
 
         if ($data) {
             return ApiFormatter::createApi(200, 'Data tujuan berhasil diambil', $data);

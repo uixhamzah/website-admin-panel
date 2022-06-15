@@ -95,7 +95,13 @@ class UserController extends Controller
 
     public function fetch(Request $request)
     {
-        return ApiFormatter::createApi(200,'Profile user berhasil diambil', $request->user());
+        // $user = Auth::user();
+        // $user = $request->user();
+        $user = User::find($request->user()->id);
+        $user['no_telp'] = auth()->user()->details->no_telp;
+        $user['provinsi'] = auth()->user()->details->kabupaten->provinsi->name;
+        $user['kabupaten'] = auth()->user()->details->kabupaten->name;
+        return ApiFormatter::createApi(200,'Profile user berhasil diambil', $user);
     }
 
     public function updatePorfile(Request $request)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AlamatController;
+use App\Http\Controllers\API\DriverController;
 use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,4 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
 Route::resource('tujuan', TujuanController::class);
+Route::resource('driver', DriverController::class);
