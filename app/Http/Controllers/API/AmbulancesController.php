@@ -54,6 +54,17 @@ class AmbulancesController extends Controller
         $result = collect();
 
         foreach ($users as $user) {
+
+            $dis = rand(1500, 10000);
+
+            $div = $dis * 1.2 + 100;
+            $dit = $div / 1000;
+
+            $duv = $div * 0.2;
+            $dut = $duv / 60;
+            
+            
+
             $result->push([
                 'id' => $user->id,
                 'namaInstansi' => $user->driverDetails->penyedia->nama_penyedia,
@@ -64,22 +75,23 @@ class AmbulancesController extends Controller
                     '_latitude' => (float)$user->driverDetails->penyedia->lat,
                     '_longitude' => (float)$user->driverDetails->penyedia->long,
                 ],
-                'distance' => 2209,
+                'distance' => $dis,
                 'distanceOnTheRoad' => [
-                    'text' => '3.5 km',
-                    'value' => 3509,
+                    'text' => number_format($dit,1).' km',
+                    'value' => (int)$div,
                 ],
                 'duration' => [
-                    'text' => '9 mins',
-                    'value' => 569,
+                    'text' => (int)$dut.' mins',
+                    'value' => (int)$duv,
                 ],
             ]);
         }
 
         $data = [
             'origin_addresses' => [$location],
-            'found' => $users->count(),
-            'ambulances' => $result
+            'found' => 5,
+            // 'found' => $users->count(),
+            'ambulances' => $result->take(5)
         ];
 
         if ($data) {
