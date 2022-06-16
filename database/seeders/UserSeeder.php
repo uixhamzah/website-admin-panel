@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Phil Anggara',
+            'name' => 'Phil Bawole',
             'username' => 'philanggara',
             'email' => 'philanggara@gmail.com',
             // 'profile_pic' => '',
@@ -25,17 +25,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('Admin123')
         ]);
         User::create([
-            'name' => 'Anggara Bawole',
-            'username' => 'anggarabawole',
-            'email' => 'anggarabawole@gmail.com',
+            'name' => 'Aditya Ekafernanda Manansang',
+            'username' => 'adityamanansang',
+            'email' => 'adityamanansang@gmail.com',
             // 'profile_pic' => '',
             'role' => 'Admin',
             'password' => Hash::make('Admin123')
         ]);
         User::create([
-            'name' => 'Phil Bawole',
-            'username' => 'philbawole',
-            'email' => 'philbawole@gmail.com',
+            'name' => 'Fajar Maftuh Fadli',
+            'username' => 'fajarfadli',
+            'email' => 'fajarfadli@gmail.com',
             // 'profile_pic' => '',
             'role' => 'Admin',
             'password' => Hash::make('Admin123')

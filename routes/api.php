@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AlamatController;
+use App\Http\Controllers\API\AmbulancesController;
 use App\Http\Controllers\API\DriverController;
 use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
@@ -22,6 +23,10 @@ use App\Http\Controllers\API\UserController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::get('ambulances', [AmbulancesController::class, 'ambulances']);
+Route::get('ambulances/closest', [AmbulancesController::class, 'closest']);
+Route::get('test', [AmbulancesController::class, 'test']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);

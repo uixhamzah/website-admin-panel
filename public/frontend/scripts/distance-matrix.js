@@ -1,32 +1,42 @@
-// AIzaSyBzQGVlSBUfu48Db575mcO0PGUDh4D-TL0
+// AIzaSyC6SBYyFZItqh-p0a0695QOqhD_88xe94s
 
+// var user = new google.maps.LatLng(1.4870428730712724, 124.8438550635048);
+// var drivers = [
+//   {
+//     lat: 1.4876308588283509,
+//     lng: 124.83760674457933
+//   },
+//   {
+//     lat: 1.4868969767230382,
+//     lng: 124.9164488815423
+//   },
+//   {
+//     lat: 1.4535352685095706,
+//     lng: 124.808170021948
+//   },
+// ];
 
-var origin1 = new google.maps.LatLng(1.721836469774481, 124.97064915337417);
-var origin2 = new google.maps.LatLng(1.4411574208248836, 125.1461164897947);
-var destinationA = new google.maps.LatLng(1.5036707390291475, 124.86630236181382);
-var destinationB = new google.maps.LatLng(1.4410739657595828, 125.15618992008085);
-// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-// var origin2 = 'Greenwich, England';
-// var destinationA = 'Stockholm, Sweden';
-// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+var driver = [];
+for (var x = 0; x < drivers.length; x++) {
+  driver.push(new google.maps.LatLng(drivers[x].lat, drivers[x].lng));
+}
+
+var user = new google.maps.LatLng(pickupLocation[0], pickupLocation[1]);
 
 var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
   {
-    origins: [origin1],
-    destinations: [destinationA, destinationB],
+    origins: [user],
+    destinations: driver,
     travelMode: 'DRIVING',
-    // transitOptions: TransitOptions,
-    // drivingOptions: DrivingOptions,
-    // unitSystem: UnitSystem,
-    // avoidHighways: Boolean,
-    // avoidTolls: Boolean,
   }, callback);
 
 function callback(response, status) {
   if (status == 'OK') {
     var origins = response.originAddresses;
     var destinations = response.destinationAddresses;
+    
+    var hasil = []
 
     for (var i = 0; i < origins.length; i++) {
       var results = response.rows[i].elements;
@@ -36,8 +46,21 @@ function callback(response, status) {
         var duration = element.duration.text;
         var from = origins[i];
         var to = destinations[j];
+
+        // hasil.push(distance);
+        hasil[j] = {
+          distance: {
+            text: element.distance.text,
+            value: element.distance.value,
+          },
+          duration: {
+            text: element.duration.text,
+            value: element.duration.value,
+          }
+        };
       }
     }
-    console.log(results);
+
+    console.log(hasil);
   }
 }

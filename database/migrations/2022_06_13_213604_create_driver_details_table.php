@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('id_penyedia');
             $table->string('jenis_kelamin');
             $table->string('plat');
+            $table->string('no_telp')->nullable();
             $table->boolean('tersedia')->default(true);
             $table->string('lat')->nullable();
             $table->string('long')->nullable();

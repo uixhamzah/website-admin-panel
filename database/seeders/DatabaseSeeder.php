@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TujuanSeeder::class,
             PenyediaSeeder::class,
-            PenggunaSeeder::class,
             DriverSeeder::class,
+            PenggunaSeeder::class,
             OrderSeeder::class,
         ]);
     }
