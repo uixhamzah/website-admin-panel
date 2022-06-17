@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AlamatController;
 use App\Http\Controllers\API\AmbulancesController;
 use App\Http\Controllers\API\DriverController;
+use App\Http\Controllers\API\HospitalsController;
 use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::get('ambulances/closest', [AmbulancesController::class, 'closest']);
 Route::post('ambulances/order', [AmbulancesController::class, 'store']);
 Route::get('orders/{id}', [AmbulancesController::class, 'show']);
 Route::post('orders/{id}', [AmbulancesController::class, 'update']);
+Route::get('hospitals/closest', [HospitalsController::class, 'closest']);
 // Route::get('test', [AmbulancesController::class, 'test']);
 
 Route::middleware('auth:sanctum')->group(function () {
