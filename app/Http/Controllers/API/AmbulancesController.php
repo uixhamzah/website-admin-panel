@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\User;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\DriverDetails;
+use App\Models\Order;
+use App\Models\Tujuan;
+use Carbon\Carbon;
 
 class AmbulancesController extends Controller
 {
@@ -45,7 +51,7 @@ class AmbulancesController extends Controller
         }
     }
 
-    public function closest(Request $request)
+    public function closestV1(Request $request)
     {
         $location = $request->input('location');
         $radius = $request->input('radius');
@@ -101,6 +107,142 @@ class AmbulancesController extends Controller
         }
     }
 
+    public function closest(Request $request)
+    {
+        $key = 'AIzaSyC6SBYyFZItqh-p0a0695QOqhD_88xe94s';
+        $origins = $request->input('location');
+        $origin_1 = Str::before($origins, ',');
+        $origin_2 = Str::after($origins, ',');
+        $radius = $request->input('radius');
+        
+        // $test = 'test';
+        // return response()->json($test);
+
+        $user = User::find(22);
+        $drivers = User::where('role','Driver')->whereRelation('driverDetails','tersedia',1)->whereRelation('driverDetails.penyedia.kabupaten','province_id',$user->details->kabupaten->province_id)->get();
+
+        $ambulances = collect();
+
+        $destinations = [];
+        foreach ($drivers as $driver) {
+            $distance = $this->getDistance($origin_1, $origin_2, $driver->driverDetails->penyedia->lat, $driver->driverDetails->penyedia->long);
+            if ($distance < $radius) {
+                $destinations[] = $driver->driverDetails->penyedia->lat.','.$driver->driverDetails->penyedia->long;
+
+                $ambulances->push([
+                    'id' => $driver->id,
+                    'namaInstansi' => $driver->driverDetails->penyedia->nama_penyedia,
+                    'kontakPicAmbulance' => $driver->driverDetails->no_telp,
+                    'namaDriver' => $driver->name,
+                    'platNomor' => $driver->driverDetails->plat,
+                    'geopoint' => [
+                        '_latitude' => (float)$driver->driverDetails->penyedia->lat,
+                        '_longitude' => (float)$driver->driverDetails->penyedia->long,
+                    ],
+                    'distance' => $distance,
+                    'distanceOnTheRoad' => [
+                        'text' => '0 km',
+                        'value' => 0,
+                    ],
+                    'duration' => [
+                        'text' => '0 mins',
+                        'value' => 0,
+                    ],
+                ]);
+            }
+        }
+
+        if (!$destinations) {
+            return response()->json([
+                'found' => $ambulances->count(),
+                'message' => 'no ambulance found in this area'
+            ]);
+        }
+
+        $desJoin = (Arr::join($destinations, '%7C'));
+
+        $result = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins='.$origins.'&destinations='.$desJoin.'&key='.$key));
+
+        $data = [
+            'origin_addresses' => $result->origin_addresses,
+            'found' => $ambulances->count(),
+            'ambulances' => $ambulances
+        ];
+        
+        return response()->json($data);
+    }
+
+    public function store(Request $request)
+    {
+        // $user = auth()->user();
+        $user = User::find($request->id_pengguna);
+        $driver = User::find($request->id_driver);
+        $tujuan = Tujuan::find($request->id_tujuan);
+        $tanggal = Carbon::today();
+
+        if (!$user) {
+            return ApiFormatter::createApi(400, 'Pengguna tidak ditemukan');
+        }
+        if (!$driver) {
+            return ApiFormatter::createApi(400, 'Driver tidak ditemukan');
+        }
+        if (!$tujuan) {
+            return ApiFormatter::createApi(400, 'Tujuan tidak ditemukan');
+        }
+
+        $detail = [
+            'pengguna' => $user,
+            'driver' => $driver,
+            'tujuan' => $tujuan,
+        ];
+
+        $order = Order::create([
+            'id_pengguna' => $user->id,
+            'id_driver' => $driver->id,
+            'id_tujuan' => $tujuan->id,
+            'keadaan' => $request->keadaan,
+            'tanggal' => $tanggal,
+        ]);
+
+        $driverDetail = DriverDetails::find($driver->driverDetails->id);
+        $driverDetail->tersedia = false;
+        $driverDetail->save();
+
+        return ApiFormatter::createApi(201, 'Pesanan berhasil dibuat', [
+            'order' => $order,
+            'detail' => $detail,
+        ]);
+    }
+    
+    public function show($id)
+    {
+        $item = Order::with(['pengguna','driver','driver.driverDetails.penyedia.kabupaten.provinsi','tujuan.kabupaten.provinsi'])->find($id);
+
+        if ($item) {
+            return ApiFormatter::createApi(200, 'Detail pesanan berhasil diambil', $item);
+        } else {
+            return ApiFormatter::createApi(404, 'Pesanan tidak ditemukan');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        $order = Order::find($id);
+
+        if ($order) {
+
+            $order->update($data);
+            $driverDetail = DriverDetails::find($order->driver->driverDetails->id);
+            $driverDetail->tersedia = true;
+            $driverDetail->save();
+
+            return ApiFormatter::createApi(200, 'Status pesanan berhasil diupdate', $order);
+        } else {
+            return ApiFormatter::createApi(404, 'Pesanan tidak ditemukan');
+        }
+    }
+
     public function distanceMatrix()
     {
         $pick = [-6.1714120085292, 106.82701447780497];
@@ -121,24 +263,5 @@ class AmbulancesController extends Controller
             'pick' => $pick,
             'radius' => $radius
         ]);
-    }
-
-    public function test(Request $request)
-    {
-        // $pick = str_replace(' ', '', $request->input('pick'));
-        // $delivery = str_replace(' ', '', $request->input('delivery'));
-        $pick = str_replace(' ', '', 'Manado, Manado City, North Sulawesi');
-        $delivery = str_replace(' ', '', 'Bitung, Bitung City, North Sulawesi');
-
-        $milleage_result = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $pick . '&destinations=' . $delivery. '&key=AIzaSyC6SBYyFZItqh-p0a0695QOqhD_88xe94s');
-
-        $milleage_result = json_decode($milleage_result);
-
-        return response()->json($milleage_result);
-
-
-        // $data = User::all();
-
-        // return response()->json($data);
     }
 }
