@@ -114,21 +114,22 @@ class AmbulancesController extends Controller
         $origin_1 = Str::before($origins, ',');
         $origin_2 = Str::after($origins, ',');
         $radius = $request->input('radius');
-        
-        // $test = 'test';
-        // return response()->json($test);
 
         $user = User::find(22);
         $drivers = User::where('role','Driver')->whereRelation('driverDetails','tersedia',1)->whereRelation('driverDetails.penyedia.kabupaten','province_id',$user->details->kabupaten->province_id)->get();
 
+        // Membuat array untuk menyimpan data driver yang ditemukan
         $ambulances = collect();
 
         $destinations = [];
         foreach ($drivers as $driver) {
+            // Mengecek driver yang berada di radius
             $distance = $this->getDistance($origin_1, $origin_2, $driver->driverDetails->penyedia->lat, $driver->driverDetails->penyedia->long);
             if ($distance < $radius) {
+                // Jika driver berada di radius, maka akan ditambahkan ke array destinations
                 $destinations[] = $driver->driverDetails->penyedia->lat.','.$driver->driverDetails->penyedia->long;
 
+                // Menambahkan driver ke array ambulances
                 $ambulances->push([
                     'id' => $driver->id,
                     'namaInstansi' => $driver->driverDetails->penyedia->nama_penyedia,
@@ -152,6 +153,7 @@ class AmbulancesController extends Controller
             }
         }
 
+        // Jika tidak ada driver yang ditemukan, maka akan dikembalikan response dengan status 400
         if (!$destinations) {
             return response()->json([
                 'found' => $ambulances->count(),
@@ -161,14 +163,43 @@ class AmbulancesController extends Controller
 
         $desJoin = (Arr::join($destinations, '%7C'));
 
+        // Mengambil data jarak dan waktu dari google maps
         $result = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins='.$origins.'&destinations='.$desJoin.'&key='.$key));
 
+        // Menggabungkan data jarak dan waktu dengan data driver yang ditemukan
+        $newAmbulances = collect();
+        $loopIndex = 0;
+        foreach ($ambulances as $ambulance) {
+            $newAmbulances->push([
+                'id' => $ambulance['id'],
+                'namaInstansi' => $ambulance['namaInstansi'],
+                'kontakPicAmbulance' => $ambulance['kontakPicAmbulance'],
+                'namaDriver' => $ambulance['namaDriver'],
+                'platNomor' => $ambulance['platNomor'],
+                'geopoint' => [
+                    '_latitude' => $ambulance['geopoint']['_latitude'],
+                    '_longitude' => $ambulance['geopoint']['_longitude'],
+                ],
+                'distance' => $ambulance['distance'],
+                'distanceOnTheRoad' => [
+                    'text' => $result->rows[0]->elements[$loopIndex]->distance->text,
+                    'value' => $result->rows[0]->elements[$loopIndex]->distance->value,
+                ],
+                'duration' => [
+                    'text' => $result->rows[0]->elements[$loopIndex]->duration->text,
+                    'value' => $result->rows[0]->elements[$loopIndex]->duration->value,
+                ],
+            ]);
+            $loopIndex++;
+        }
+
+        // Format data yang akan dikembalikan
         $data = [
             'origin_addresses' => $result->origin_addresses,
             'found' => $ambulances->count(),
-            'ambulances' => $ambulances
+            'ambulances' => $newAmbulances
         ];
-        
+
         return response()->json($data);
     }
 

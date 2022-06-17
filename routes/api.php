@@ -26,9 +26,9 @@ use App\Http\Controllers\API\UserController;
 
 Route::get('ambulances', [AmbulancesController::class, 'ambulances']);
 Route::get('ambulances/closest', [AmbulancesController::class, 'closest']);
-Route::post('ambulances', [AmbulancesController::class, 'store']);
-Route::get('ambulances/{id}', [AmbulancesController::class, 'show']);
-Route::post('ambulances/{id}', [AmbulancesController::class, 'update']);
+Route::post('ambulances/order', [AmbulancesController::class, 'store']);
+Route::get('orders/{id}', [AmbulancesController::class, 'show']);
+Route::post('orders/{id}', [AmbulancesController::class, 'update']);
 // Route::get('test', [AmbulancesController::class, 'test']);
 
 Route::middleware('auth:sanctum')->group(function () {
