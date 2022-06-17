@@ -206,7 +206,7 @@ class AmbulancesController extends Controller
     public function store(Request $request)
     {
         // $user = auth()->user();
-        $user = User::find($request->id_pengguna);
+        $user = User::find(22);
         $driver = User::find($request->id_driver);
         $tujuan = Tujuan::find($request->id_tujuan);
         $tanggal = Carbon::today();
