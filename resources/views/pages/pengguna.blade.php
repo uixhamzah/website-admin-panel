@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Bisa Cari Ambulance | Riwayat Pesanan')
+@section('title', 'Bisa Cari Ambulance | Pengguna')
 
 @section('content')
 <div class="page-heading">
@@ -24,7 +24,7 @@
               <th class="text-center">Email</th>
               <th class="text-center">Provinsi</th>
               <th class="text-center">Kabupaten/Kota</th>
-              <th class="text-center">No. Telp</th>
+              <th class="text-center">No. WA</th>
               <th></th>
             </tr>
           </thead>
@@ -42,9 +42,14 @@
                 </td>
                 <td>{{ Str::title($item->details->kabupaten->provinsi->name) }}</td>
                 <td>{{ Str::title($item->details->kabupaten->name) }}</td>
-                <td>{{ $item->details->no_telp }}</td>
                 <td>
-                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
+                  <a href="https://wa.me/{{ $item->details->no_telp }}" target="_blank" class="btn btn-sm icon icon-left btn-outline-success rounded-pill">
+                    <i class="fab fa-whatsapp"></i>
+                    +{{ $item->details->no_telp }}
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="m" data-bs-target="#detail-{{ $item->id }}">
                     <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Pengguna"></i>
                   </button>
                 </td>

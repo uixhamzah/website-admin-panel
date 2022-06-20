@@ -15,6 +15,7 @@ class TujuanSeeder extends Seeder
      */
     public function run()
     {
+        // Jakarta
         Tujuan::create([
             'id_kabupaten' => 3173,
             'nama_rs' => 'Gandaria Hospital',
@@ -200,6 +201,140 @@ class TujuanSeeder extends Seeder
             'nama_rs' => 'RS Ananda Bekasi',
             'lat' => '-6.2093215038065095',
             'long' => '106.98168577527038',
+        ]);
+        
+        // Manado
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'RSUP Prof. Dr. RD Kandou Manado',
+            'lat' => '1.4553419686778488',
+            'long' => '124.80865751194679',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'Rumah Sakit Bhayangkara',
+            'lat' => '1.4553345521494794',
+            'long' => '124.83709554401862',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'Rumah Sakit Advent Manado',
+            'lat' => '1.4655500389270857',
+            'long' => '124.85038061822607',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'Rumah Sakit Robert Wolter Mongisidi',
+            'lat' => '1.4742677507229744',
+            'long' => '124.84258381306313',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'RSU Pancaran Kasih',
+            'lat' => '1.4788342357035078',
+            'long' => '124.83634157113676',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'Siloam Hospitals Manado',
+            'lat' => '1.4875936471330675',
+            'long' => '124.83759965199243',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'Rumah Sakit Umum Permata Bunda Manado',
+            'lat' => '1.4818588364572973',
+            'long' => '124.85672792117622',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7171,
+            'nama_rs' => 'RSI Sitti Maryam',
+            'lat' => '1.5205129592227955',
+            'long' => '124.8504035128431',
+        ]);
+
+        // Minut
+        Tujuan::create([
+            'id_kabupaten' => 7106,
+            'nama_rs' => 'Sentra Medika Hospital Minahasa Utara',
+            'lat' => '1.4868797756463321',
+            'long' => '124.9164758748537',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7106,
+            'nama_rs' => 'RSUD Maria Walanda Maramis',
+            'lat' => '1.4359938492070008',
+            'long' => '124.97153334014027',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 7106,
+            'nama_rs' => 'RSU Hermana Lembean',
+            'lat' => '1.401620387118219',
+            'long' => '125.00340450512545',
+        ]);
+
+        // Kota Bandung
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'RS. Mayapada Bandung',
+            'lat' => '-6.949297831826033',
+            'long' => '107.63492197147357',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'RS Sartika Asih Bandung',
+            'lat' => '-6.956525644689387',
+            'long' => '107.61258800448485',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'RS Humana Prima',
+            'lat' => '-6.940791518829012',
+            'long' => '107.66397279203005',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'Rumah Sakit Umum Pindad',
+            'lat' => '-6.940029995946211',
+            'long' => '107.64622763254393',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'Rumah Sakit Muhammadiyah Bandung',
+            'lat' => '-6.933588346846119',
+            'long' => '107.62316014168067',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'Rumah Sakit Rajawali',
+            'lat' => '-6.912387146224158',
+            'long' => '107.5734139521212',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'Rumah Sakit Santosa Bandung Kopo',
+            'lat' => '-6.9528392711382585',
+            'long' => '107.58667492009187',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3273,
+            'nama_rs' => 'RSIA Harapan Bunda',
+            'lat' => '-6.95593398184457',
+            'long' => '107.66215853773862',
+        ]);
+
+        // Kabupaten Bandung
+        Tujuan::create([
+            'id_kabupaten' => 3204,
+            'nama_rs' => 'Rumah Sakit Umum Bina Sehat',
+            'lat' => '-6.985859268890489',
+            'long' => '107.62476618592848',
+        ]);
+        Tujuan::create([
+            'id_kabupaten' => 3204,
+            'nama_rs' => 'RSUD Al-Ihsan Bandung',
+            'lat' => '-7.007967604324243',
+            'long' => '107.6228979013365',
         ]);
     }
 }

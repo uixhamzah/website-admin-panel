@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Bisa Cari Ambulance | Riwayat Pesanan')
+@section('title', 'Bisa Cari Ambulance | Rumah Sakit')
 
 @section('content')
 <div class="page-heading">
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="m" data-bs-target="#detail-{{ $item->id }}">
                       <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Tujuan"></i>
                     </button>
                     <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">

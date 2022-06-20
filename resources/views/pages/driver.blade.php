@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Bisa Cari Ambulance | Riwayat Pesanan')
+@section('title', 'Bisa Cari Ambulance | Data Driver')
 
 @section('content')
 <div class="page-heading">
@@ -28,6 +28,7 @@
               <th class="text-center">Nama</th>
               <th class="text-center">Penyedia</th>
               <th class="text-center">No. Polisi</th>
+              <th class="text-center">No. WA</th>
               <th></th>
             </tr>
           </thead>
@@ -46,8 +47,14 @@
                   <span class="badge bg-secondary">{{ $item->driverDetails->plat }}</span>
                 </td>
                 <td>
+                  <a href="https://wa.me/{{ $item->driverDetails->no_telp }}" target="_blank" class="btn btn-sm icon icon-left btn-outline-success rounded-pill">
+                    <i class="fab fa-whatsapp"></i>
+                    +{{ $item->driverDetails->no_telp }}
+                  </a>
+                </td>
+                <td>
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
+                    <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="m" data-bs-target="#detail-{{ $item->id }}">
                       <i class="far fa-eye text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Driver"></i>
                     </button>
                     <button type="button" class="btn icon btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">

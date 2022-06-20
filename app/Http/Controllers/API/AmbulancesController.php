@@ -116,7 +116,8 @@ class AmbulancesController extends Controller
         $radius = $request->input('radius');
 
         $user = User::find(22);
-        $drivers = User::where('role','Driver')->whereRelation('driverDetails','tersedia',1)->whereRelation('driverDetails.penyedia.kabupaten','province_id',$user->details->kabupaten->province_id)->get();
+        $drivers = User::where('role','Driver')->whereRelation('driverDetails','tersedia',1)->get();
+        // $drivers = User::where('role','Driver')->whereRelation('driverDetails','tersedia',1)->whereRelation('driverDetails.penyedia.kabupaten','province_id',$user->details->kabupaten->province_id)->get();
 
         // Membuat array untuk menyimpan data driver yang ditemukan
         $ambulances = collect();

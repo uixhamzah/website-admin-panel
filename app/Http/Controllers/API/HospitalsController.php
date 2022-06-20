@@ -20,7 +20,8 @@ class HospitalsController extends Controller
         $origin_2 = Str::after($origins, ',');
         $radius = $request->input('radius');
         $user = User::find(22);
-        $hospitalsInProvinces = Tujuan::whereRelation('kabupaten','province_id',$user->details->kabupaten->province_id)->get();
+        $hospitalsInProvinces = Tujuan::all();
+        // $hospitalsInProvinces = Tujuan::whereRelation('kabupaten','province_id',$user->details->kabupaten->province_id)->get();
 
         $hospitals = collect();
         $hospitalCoordinates = [];
